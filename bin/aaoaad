@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+STATUS="RUNNING"
+while [[ ${STATUS} != "TERMINATE" ]];
+do
+        if [[ -f /opt/openknowit_ansibleautomation_feed/etc/aaoaa.json ]];
+        then
+                 /opt/.virtualenv/aaoaa_env/bin/python /opt/openknowit_ansibleautomation_feed/bin/awx_manager.py master
+        fi
+        COUNT=0
+done

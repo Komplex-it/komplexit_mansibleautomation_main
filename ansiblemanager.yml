@@ -1,0 +1,38 @@
+- name: "ansiblemanager"
+  hosts: all
+  tasks:
+  - name: "ansiblemanager | install git"
+    ansible.builtin.package:
+      name: git
+      state: latest
+    become: yes
+
+  - name: "ansiblemanager |Add the automation group"
+    ansible.builtin.group:
+      name: "{{ serviceaccount['name'] }}"
+      state: present
+    become: yes
+
+  - name: "ansiblemanager |Add the automation user"
+    ansible.builtin.user:
+      name: "{{ serviceaccount['name'] }}"
+      comment: "{{ serviceaccount['gecos'] }}"
+      group: "{{ serviceaccount['name'] }}"
+    become: yes
+
+  - name: "Ansiblemanager | pip install awxcli"
+    ansible.builtin.pip:
+      name: https://releases.ansible.com/ansible-tower/cli/ansible-tower-cli-latest.tar.gz
+    become: yes
+
+  - name: "Ansiblemanager | pip install kalm"
+    ansible.builtin.pip:
+      name: kalm
+    become: yes
+
+
+
+
+
+
+
